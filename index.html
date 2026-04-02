@@ -19,7 +19,6 @@
     --green: #00e57a;
     --blue: #4a9eff;
     --red: #ff5a5a;
-    --amber: #ffb340;
     --radius: 14px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -30,17 +29,15 @@
     min-height: 100vh;
     min-height: 100dvh;
   }
-
-  /* SCREENS */
   .screen { display: none; min-height: 100vh; min-height: 100dvh; flex-direction: column; }
   .screen.active { display: flex; }
-
-  /* ── WELCOME SCREEN ── */
+​
+  /* WELCOME */
   #screen-welcome {
     align-items: center;
     justify-content: center;
     padding: 40px 24px;
-    gap: 32px;
+    gap: 28px;
   }
   .logo-mark {
     width: 72px; height: 72px;
@@ -76,6 +73,7 @@
     color: var(--muted);
     text-align: center;
     line-height: 1.6;
+    margin-top: -16px;
   }
   .name-section { width: 100%; max-width: 320px; }
   .label {
@@ -86,29 +84,38 @@
     text-transform: uppercase;
     margin-bottom: 10px;
   }
-  .name-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  .name-btn {
-    padding: 13px 10px;
+  .name-input {
+    width: 100%;
+    padding: 16px;
     background: var(--surface);
     border: 1.5px solid var(--border);
     border-radius: var(--radius);
     color: var(--text);
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .name-input:focus { border-color: var(--green); }
+  .name-input::placeholder { color: var(--muted); font-size: 16px; }
+  .suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    min-height: 36px;
+  }
+  .suggestion {
+    padding: 7px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 14px;
+    color: var(--muted);
     cursor: pointer;
     transition: all 0.15s;
-    text-align: center;
   }
-  .name-btn:active { transform: scale(0.97); }
-  .name-btn.selected {
-    border-color: var(--green);
-    color: var(--green);
-    background: rgba(0,229,122,0.08);
-  }
+  .suggestion:active { border-color: var(--green); color: var(--green); }
   .continue-btn {
     width: 100%;
     max-width: 320px;
@@ -126,12 +133,9 @@
   }
   .continue-btn.ready { opacity: 1; }
   .continue-btn.ready:active { transform: scale(0.98); }
-
-  /* ── SCAN SCREEN ── */
-  #screen-scan {
-    padding: 24px;
-    gap: 20px;
-  }
+​
+  /* SCAN SCREEN */
+  #screen-scan { padding: 24px; gap: 20px; }
   .top-bar {
     display: flex;
     align-items: center;
@@ -149,11 +153,7 @@
     color: var(--muted);
     cursor: pointer;
   }
-  .user-dot {
-    width: 8px; height: 8px;
-    background: var(--green);
-    border-radius: 50%;
-  }
+  .user-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; }
   .user-name-display { color: var(--text); font-weight: 500; }
   .app-title {
     font-family: 'DM Mono', monospace;
@@ -161,7 +161,6 @@
     color: var(--muted);
     letter-spacing: 0.5px;
   }
-
   .id-input-wrap {
     background: var(--surface);
     border: 1.5px solid var(--border);
@@ -184,13 +183,7 @@
     letter-spacing: 1px;
   }
   .id-input::placeholder { color: var(--border); }
-
-  .quick-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
-  .quick-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+  .quick-chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip {
     padding: 6px 12px;
     background: var(--surface);
@@ -203,7 +196,6 @@
     transition: all 0.15s;
   }
   .chip:active { border-color: var(--blue); color: var(--blue); }
-
   .action-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -222,15 +214,15 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    transition: transform 0.15s, opacity 0.15s;
+    transition: transform 0.15s;
   }
   .action-btn:active { transform: scale(0.97); }
   .action-btn .icon { font-size: 28px; }
-  .btn-out { background: rgba(0,229,122,0.12); color: var(--green); border: 1.5px solid rgba(0,229,122,0.3); }
-  .btn-in  { background: rgba(74,158,255,0.12); color: var(--blue);  border: 1.5px solid rgba(74,158,255,0.3); }
+  .btn-out  { background: rgba(255,179,64,0.12); color: var(--amber); border: 1.5px solid rgba(255,179,64,0.3); }
+  .btn-in   { background: rgba(0,229,122,0.12);  color: var(--green); border: 1.5px solid rgba(0,229,122,0.3); }
   .btn-fault { background: rgba(255,90,90,0.12); color: var(--red); border: 1.5px solid rgba(255,90,90,0.3); grid-column: 1 / -1; flex-direction: row; justify-content: center; padding: 14px; }
-
-  /* ── STATUS SCREEN ── */
+​
+  /* STATUS */
   #screen-status {
     align-items: center;
     justify-content: center;
@@ -260,7 +252,7 @@
     margin-top: 8px;
   }
   .back-btn:active { opacity: 0.7; }
-
+​
   /* TOAST */
   .toast {
     position: fixed;
@@ -275,160 +267,161 @@
     transition: transform 0.3s ease;
     pointer-events: none;
     white-space: nowrap;
+    z-index: 99;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
-
-<!-- WELCOME / NAME PICKER -->
+​
+<!-- WELCOME / NAME -->
 <div class="screen active" id="screen-welcome">
   <div class="logo-mark"></div>
-  <div>
-    <div class="welcome-title">Lab Tracker</div>
-    <div class="welcome-sub" style="margin-top:8px">Who are you? We'll remember<br>for next time.</div>
-  </div>
+  <div class="welcome-title">Lab Tracker</div>
+  <div class="welcome-sub">Who are you? We'll remember<br>for next time.</div>
   <div class="name-section">
-    <div class="label">Select your name</div>
-    <div class="name-grid" id="name-grid"></div>
+    <div class="label">Your name</div>
+    <input class="name-input" id="name-input" type="text" placeholder="Type your name…"
+      autocomplete="off" autocorrect="off" spellcheck="false"
+      oninput="onNameType()" onkeydown="if(event.key==='Enter')saveName()">
+    <div class="suggestions" id="suggestions"></div>
   </div>
   <button class="continue-btn" id="continue-btn" onclick="saveName()">Continue →</button>
 </div>
-
-<!-- MAIN SCAN / ACTION SCREEN -->
+​
+<!-- SCAN / ACTION -->
 <div class="screen" id="screen-scan">
   <div class="top-bar">
     <div class="app-title">lab-tracker</div>
     <div class="user-pill" onclick="changeName()">
       <div class="user-dot"></div>
       <span class="user-name-display" id="user-display">—</span>
+      <span style="font-size:11px;color:var(--muted);margin-left:2px">✎</span>
     </div>
   </div>
-
+​
   <div class="id-input-wrap">
     <div class="label">Unit ID</div>
-    <input class="id-input" id="unit-id" placeholder="OHM1-B-01" maxlength="20"
+    <input class="id-input" id="unit-id" placeholder="DEV-B-01" maxlength="20"
       oninput="this.value=this.value.toUpperCase()" autocomplete="off" autocorrect="off" spellcheck="false">
   </div>
-
+​
   <div>
-    <div class="quick-label label" style="margin-bottom:8px">Recent units</div>
-    <div class="quick-chips" id="recent-chips">
-      <span class="chip" onclick="setId('DEV-B-01')">DEV-B-01</span>
-      <span class="chip" onclick="setId('DEV-H-01')">DEV-H-01</span>
-      <span class="chip" onclick="setId('DEV-B-02')">DEV-B-02</span>
-    </div>
+    <div class="label" style="margin-bottom:8px">Recent units</div>
+    <div class="quick-chips" id="recent-chips"></div>
   </div>
-
+​
   <div class="action-row">
     <button class="action-btn btn-out" onclick="doAction('out')">
-      <span class="icon">⬆️</span>Check out
+      <span class="icon">🏠</span>Take home
     </button>
     <button class="action-btn btn-in" onclick="doAction('in')">
-      <span class="icon">⬇️</span>Check in
+      <span class="icon">🔬</span>Return to lab
     </button>
     <button class="action-btn btn-fault" onclick="doAction('fault')">
       <span class="icon" style="font-size:20px">⚠️</span> Mark as faulty
     </button>
   </div>
 </div>
-
-<!-- RESULT SCREEN -->
+​
+<!-- STATUS -->
 <div class="screen" id="screen-status">
   <div class="status-icon" id="status-icon"></div>
   <div class="status-title" id="status-title"></div>
   <div class="status-detail" id="status-detail"></div>
   <button class="back-btn" onclick="goBack()">← Back</button>
 </div>
-
+​
 <div class="toast" id="toast"></div>
-
+​
 <script>
-// ── CONFIG ──────────────────────────────────────────────
 const WEBHOOK = 'YOUR_WEBHOOK_URL_HERE';
-const TEAM = [
-  'Dev1','Dev2','Dev3','Dev4','Dev5','Dev6','Dev7','Dev8'
-];
-// ────────────────────────────────────────────────────────
-
 const $ = id => document.getElementById(id);
-
-// Name handling
 let currentName = localStorage.getItem('ltname') || '';
-
-function buildNameGrid() {
-  const grid = $('name-grid');
-  grid.innerHTML = '';
-  TEAM.forEach(n => {
-    const b = document.createElement('button');
-    b.className = 'name-btn' + (n === currentName ? ' selected' : '');
-    b.textContent = n;
-    b.onclick = () => {
-      document.querySelectorAll('.name-btn').forEach(x => x.classList.remove('selected'));
-      b.classList.add('selected');
-      currentName = n;
-      $('continue-btn').classList.add('ready');
-    };
-    grid.appendChild(b);
-  });
-  if (currentName) $('continue-btn').classList.add('ready');
+​
+// ── NAME ──────────────────────────────────────
+function getSavedNames() {
+  return JSON.parse(localStorage.getItem('ltnames') || '[]');
 }
-
+function saveNameToHistory(name) {
+  let names = getSavedNames();
+  names = [name, ...names.filter(n => n.toLowerCase() !== name.toLowerCase())].slice(0, 8);
+  localStorage.setItem('ltnames', JSON.stringify(names));
+}
+function onNameType() {
+  const val = $('name-input').value.trim();
+  currentName = val;
+  $('continue-btn').classList.toggle('ready', val.length > 0);
+  const saved = getSavedNames();
+  const matches = val.length === 0
+    ? saved
+    : saved.filter(n => n.toLowerCase().startsWith(val.toLowerCase()) && n.toLowerCase() !== val.toLowerCase());
+  renderSuggestions(matches);
+}
+function renderSuggestions(names) {
+  $('suggestions').innerHTML = names.map(n =>
+    `<span class="suggestion" onclick="pickSuggestion('${n}')">${n}</span>`
+  ).join('');
+}
+function pickSuggestion(name) {
+  $('name-input').value = name;
+  currentName = name;
+  $('continue-btn').classList.add('ready');
+  $('suggestions').innerHTML = '';
+}
 function saveName() {
-  if (!currentName) return;
-  localStorage.setItem('ltname', currentName);
-  $('user-display').textContent = currentName;
+  const val = $('name-input').value.trim();
+  if (!val) return;
+  currentName = val;
+  saveNameToHistory(val);
+  localStorage.setItem('ltname', val);
+  $('user-display').textContent = val;
   show('screen-scan');
 }
-
 function changeName() {
-  buildNameGrid();
+  $('name-input').value = currentName;
+  $('continue-btn').classList.add('ready');
+  renderSuggestions(getSavedNames().filter(n => n !== currentName));
   show('screen-welcome');
 }
-
-// Screen routing
+​
+// ── ROUTING ───────────────────────────────────
 function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   $(id).classList.add('active');
 }
-
-// Unit ID
-function setId(id) {
-  $('unit-id').value = id;
-}
-
-// Recent units (stored locally)
+​
+// ── RECENT UNITS ──────────────────────────────
+function setId(id) { $('unit-id').value = id; }
 function addRecent(id) {
   let r = JSON.parse(localStorage.getItem('recent') || '[]');
-  r = [id, ...r.filter(x => x !== id)].slice(0, 5);
+  r = [id, ...r.filter(x => x !== id)].slice(0, 6);
   localStorage.setItem('recent', JSON.stringify(r));
   renderRecent();
 }
-
 function renderRecent() {
   const r = JSON.parse(localStorage.getItem('recent') || '[]');
-  if (!r.length) return;
-  $('recent-chips').innerHTML = r.map(id =>
-    `<span class="chip" onclick="setId('${id}')">${id}</span>`
-  ).join('');
+  $('recent-chips').innerHTML = r.length
+    ? r.map(id => `<span class="chip" onclick="setId('${id}')">${id}</span>`).join('')
+    : '<span style="font-size:12px;color:var(--muted)">No recent units yet</span>';
 }
-
-// Actions
+​
+// ── ACTIONS ───────────────────────────────────
 async function doAction(type) {
   const id = $('unit-id').value.trim();
   if (!id) { toast('Enter a unit ID first'); return; }
   if (!currentName) { toast('No name set'); return; }
-
-  const labels = { out: 'checked out', in: 'checked in', fault: 'marked FAULTY' };
-  const icons  = { out: '🟢', in: '🔵', fault: '🔴' };
+​
+  const labels = { out: 'taken home', in: 'returned to lab', fault: 'marked FAULTY' };
+  const icons  = { out: '🏠', in: '🔬', fault: '🔴' };
   const msg = `${icons[type]} *${id}* ${labels[type]} by ${currentName}`;
-
+​
   show('screen-status');
   $('status-icon').className = 'status-icon';
   $('status-icon').textContent = '⏳';
   $('status-title').textContent = 'Sending…';
   $('status-detail').textContent = '';
-
+​
   try {
     await fetch(WEBHOOK, {
       method: 'POST',
@@ -438,7 +431,7 @@ async function doAction(type) {
     addRecent(id);
     $('status-icon').className = 'status-icon ok';
     $('status-icon').textContent = '✓';
-    $('status-title').textContent = type === 'fault' ? 'Marked faulty' : type === 'out' ? 'Checked out' : 'Checked in';
+    $('status-title').textContent = type === 'fault' ? 'Marked faulty' : type === 'out' ? 'Taken home' : 'Returned to lab';
     $('status-detail').textContent = `${id} · ${currentName} · ${new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}`;
   } catch(e) {
     $('status-icon').className = 'status-icon err';
@@ -447,25 +440,28 @@ async function doAction(type) {
     $('status-detail').textContent = 'Check your connection and try again.';
   }
 }
-
+​
 function goBack() {
   $('unit-id').value = '';
   show('screen-scan');
 }
-
+​
 function toast(msg) {
   const t = $('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
-
-// Init
-buildNameGrid();
+​
+// ── INIT ──────────────────────────────────────
 renderRecent();
+const urlId = new URLSearchParams(window.location.search).get('id');
 if (currentName) {
   $('user-display').textContent = currentName;
   show('screen-scan');
+  if (urlId) setId(urlId.toUpperCase());
+} else {
+  renderSuggestions(getSavedNames());
 }
 </script>
 </body>
